@@ -1,4 +1,4 @@
-## ¡Buenas! Soy [Tu Nombre] <img src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif" width="40" />
+## ¡Buenas! Soy [Rodrigo Nieva] <img src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif" width="40" />
 
 ⚡  Mi foco está en crecer como profesional **Backend Development** con Python.
 
@@ -6,15 +6,6 @@
 * **SmartStore Engine:** Desarrollo de un motor de e-commerce eficiente y escalable.
 * **SmartMenu QR:** Digitalización de menús gastronómicos mediante QR.
 
-### 📈 Mis stats en GitHub
-<br>
-
-<div align="center">
-  <img height="150em" src="https://github-readme-stats-sigma-five.vercel.app/api?username=TU_USUARIO_DE_GITHUB&show_icons=true&theme=dracula&include_all_commits=true&count_private=true"/> 
-  <img height="150em" src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=TU_USUARIO_DE_GITHUB&layout=compact&langs_count=7&theme=dracula&include_all_commits=true&count_private=true"/>
-</div>
-
-<br>
 
 ### 🛠️ Tecnologías y Herramientas que más uso
 <div align="center">
@@ -30,6 +21,6 @@
 
 ### 🫂 Conectemos
 <div align="center">
-  <a href="TU_LINK_DE_LINKEDIN" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> 
-  <a href="mailto:TU_MAIL@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white"></a>
+  <a href="www.linkedin.com/in/rodrigonieva target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white"></a> 
+  <a href="mailto:nievarodrigo40@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white"></a>
 </div>
