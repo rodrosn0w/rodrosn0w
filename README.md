@@ -1,4 +1,4 @@
-## ¡Buenas! Soy [Rodrigo Nieva] <img src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif" width="40" />
+## ¡Buenas! Soy Rodrigo Nieva <img src="https://raw.githubusercontent.com/iampavangandhi/iampavangandhi/master/gifs/Hi.gif" width="40" />
 
 ⚡  Mi foco está en crecer como profesional **Backend Development** con Python.
 
