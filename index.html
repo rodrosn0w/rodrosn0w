@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rodrigo Nieva — Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --surface: #171717;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888888;
+      --accent: #00ff9d;
+      --accent2: #00bfff;
+      --white: #f5f5f5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(135deg, #0a0a0a 0%, #141414 40%, #1a1a1a 100%);
+    }
+
+    /* Geometric shape like the banner */
+    .hero-shape {
+      position: absolute;
+      right: -100px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15deg);
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, #1e1e1e, #252525);
+      clip-path: polygon(30% 0%, 100% 0%, 70% 100%, 0% 100%);
+      opacity: 0.6;
+    }
+
+    .hero-shape2 {
+      position: absolute;
+      right: 100px;
+      top: 50%;
+      transform: translateY(-60%) rotate(-15deg);
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #1c1c1c, #222);
+      clip-path: polygon(30% 0%, 100% 0%, 70% 100%, 0% 100%);
+      opacity: 0.4;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-tag::before {
+      content: '>';
+      color: var(--accent);
+      font-weight: 700;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.9;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 0.9rem 2.2rem;
+      background: var(--accent);
+      color: var(--black);
+      text-decoration: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: var(--white);
+    }
+
+    .btn-secondary {
+      padding: 0.9rem 2.2rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 7rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '//';
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 3.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      font-size: 0.8rem;
+      line-height: 1.9;
+    }
+
+    .about-text strong {
+      color: var(--accent);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .stat-box {
+      background: var(--surface);
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .skill-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .skill-category:hover {
+      border-color: var(--accent);
+    }
+
+    .skill-cat-icon {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-cat-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      transition: all 0.3s;
+    }
+
+    .skill-tag:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.4s;
+    }
+
+    .project-card:hover { border-color: #333; }
+    .project-card:hover::before { height: 100%; }
+
+    .project-sector {
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.8rem;
+    }
+
+    .project-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .project-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-metrics {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metric-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      color: var(--accent);
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .stack-tag {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.6rem;
+    }
+
+    .project-link {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: gap 0.3s;
+    }
+
+    .project-link:hover { gap: 0.8rem; }
+
+    /* EXPERIENCE */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-date {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      padding-top: 0.3rem;
+    }
+
+    .exp-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-company {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .exp-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* EDUCATION */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .edu-card:hover { border-color: var(--accent); }
+
+    .edu-type {
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.8rem;
+    }
+
+    .edu-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-institution {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-period {
+      font-size: 0.6rem;
+      color: var(--border);
+      letter-spacing: 0.1em;
+    }
+
+    /* CONTACT */
+    #contact {
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      padding: 0.9rem 2rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--border);
+      text-transform: uppercase;
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.8s forwards;
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+    .fade-in:nth-child(3) { animation-delay: 0.3s; }
+    .fade-in:nth-child(4) { animation-delay: 0.4s; }
+    .fade-in:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .hero { padding: 0 1.5rem; min-height: 100svh; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Rodrigo Nieva</div>
+    <ul class="nav-links">
+      <li><a href="#about">Sobre mí</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Proyectos</a></li>
+      <li><a href="#experience">Experiencia</a></li>
+      <li><a href="#education">Educación</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-shape2"></div>
+    <div class="hero-content">
+      <div class="hero-tag fade-in">Backend Developer</div>
+      <h1 class="hero-name fade-in">Rodrigo<br>Nieva</h1>
+      <p class="hero-title fade-in">Python · Java · Data</p>
+      <p class="hero-desc fade-in">
+        Desarrollador Backend especializado en construir arquitecturas escalables y sistemas orientados a datos. 
+        Diseño APIs desde cero y transformo flujos de datos complejos en productos funcionales que potencian la operatividad del negocio.
+      </p>
+      <div class="hero-cta fade-in">
+        <a href="#projects" class="btn-primary">Ver proyectos</a>
+        <a href="#contact" class="btn-secondary">Contacto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Sobre mí</div>
+    <h2 class="section-title">Convirtiendo problemas<br>reales en soluciones tecnológicas</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Soy un Desarrollador Backend al que le entusiasma convertir problemas reales en soluciones tecnológicas 
+          <strong>inteligentes, robustas y eficientes</strong>. Mi enfoque se centra en construir arquitecturas escalables 
+          y sistemas orientados a datos, garantizando siempre la integridad y la optimización de procesos críticos.
+        </p>
+        <p>
+          Disfruto especialmente el proceso de diseñar APIs desde cero y transformar flujos de datos complejos 
+          en productos funcionales que potencian la operatividad de un negocio.
+        </p>
+        <p>
+          Actualmente cursando <strong>Ingeniería en Informática en UADE</strong>, combinando formación académica 
+          sólida con experiencia práctica en proyectos reales de impacto.
+        </p>
+        <p>
+          Estoy listo para aportar valor en equipos de desarrollo Backend mediante la creación de 
+          sistemas robustos, seguros y optimizados.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-number">70%</div>
+          <div class="stat-label">Optimización<br>en procesamiento</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">40%</div>
+          <div class="stat-label">Reducción<br>tiempos de espera</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">35%</div>
+          <div class="stat-label">Reducción<br>errores manuales</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">2+</div>
+          <div class="stat-label">Proyectos<br>MVPs entregados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Tecnologías</div>
+    <h2 class="section-title">Stack & Herramientas</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-icon">⚙️</div>
+        <div class="skill-cat-title">Backend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">SQLAlchemy</span>
+          <span class="skill-tag">Pydantic</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">SpringBoot</span>
+          <span class="skill-tag">JUnit</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">🗄️</div>
+        <div class="skill-cat-title">Datos & Bases de datos</div>
+        <div class="skill-tags">
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">SQL Server</span>
+          <span class="skill-tag">PowerBI</span>
+          <span class="skill-tag">ETL</span>
+          <span class="skill-tag">Normalización</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">🧪</div>
+        <div class="skill-cat-title">QA & Testing</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Katalon</span>
+          <span class="skill-tag">Testing Funcional</span>
+          <span class="skill-tag">Testing No Funcional</span>
+          <span class="skill-tag">Gestión de Defectos</span>
+          <span class="skill-tag">Postman</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">☁️</div>
+        <div class="skill-cat-title">Cloud & Herramientas</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Google Cloud Platform</span>
+          <span class="skill-tag">Scrum</span>
+          <span class="skill-tag">Agile</span>
+          <span class="skill-tag">Ingeniería de Requisitos</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">🤖</div>
+        <div class="skill-cat-title">IA & Automatización</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Gemini</span>
+          <span class="skill-tag">Claude</span>
+          <span class="skill-tag">ChatGPT</span>
+          <span class="skill-tag">V0</span>
+          <span class="skill-tag">Automatización</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Proyectos</div>
+    <h2 class="section-title">Soluciones con impacto real</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-sector">Retail · Backend & Data Infrastructure</div>
+        <h3 class="project-name">SmartStore Engine</h3>
+        <p class="project-desc">
+          Infraestructura integral para la gestión de un comercio retail, diseñada para automatizar procesos críticos 
+          y garantizar la integridad de la información. API REST transaccional que integra escaneo de productos, 
+          actualización de stock en tiempo real y lógica de precios dinámicos basada en fluctuación de divisas.
+        </p>
+        <div class="project-metrics">
+          <div class="metric">
+            <span class="metric-value">70%</span>
+            <span class="metric-label">Optimización en<br>procesamiento de inventario</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">35%</span>
+            <span class="metric-label">Reducción de<br>errores manuales</span>
+          </div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">Pydantic</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">ETL</span>
+        </div>
+        <a href="https://github.com/rodrosn0w" target="_blank" class="project-link">Ver en GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-sector">Gastronomía · Customer Experience & Data</div>
+        <h3 class="project-name">SmartMenu QR</h3>
+        <p class="project-desc">
+          MVP de una solución técnica orientada al sector gastronómico para optimizar el modelo de atención 
+          "autoservicio". Digitaliza el flujo de pedidos desde la mesa eliminando fricciones operativas, 
+          con gestión de pedidos y carritos en tiempo real mediante identificadores únicos por mesa.
+        </p>
+        <div class="project-metrics">
+          <div class="metric">
+            <span class="metric-value">40%</span>
+            <span class="metric-label">Reducción proyectada<br>tiempos de espera</span>
+          </div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">REST API</span>
+        </div>
+        <a href="https://github.com/rodrosn0w" target="_blank" class="project-link">Ver en GitHub →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Experiencia</div>
+    <h2 class="section-title">Trayectoria profesional</h2>
+
+    <div class="exp-item">
+      <div class="exp-date">Sept. 2025 — Actualidad<br><br>7 meses · Remoto<br>Buenos Aires, Argentina</div>
+      <div>
+        <div class="exp-role">Backend & Data Developer</div>
+        <div class="exp-company">Freelance · Autónomo</div>
+        <div class="exp-desc">
+          Desarrollo de soluciones de software a medida y arquitecturas de datos enfocadas en resolver 
+          ineficiencias operativas mediante la automatización y la optimización de procesos. 
+          Diseño e implementación de APIs REST con FastAPI, sistemas de gestión de datos con MySQL, 
+          y pipelines ETL con Python y Pydantic. Proyectos entregados en sectores retail y gastronomía.
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Educación & Cursos</div>
+    <h2 class="section-title">Formación</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-type">Grado universitario</div>
+        <div class="edu-title">Ingeniería en Informática</div>
+        <div class="edu-institution">UADE — Universidad Argentina de la Empresa</div>
+        <div class="edu-period">Ago. 2022 — Ago. 2027 (en curso)</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-type">Curso</div>
+        <div class="edu-title">Generative AI Zero to Hero Academy</div>
+        <div class="edu-institution">Certificación en IA Generativa</div>
+        <div class="edu-period">2024</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-type">Curso</div>
+        <div class="edu-title">Google Cloud Computing Foundations</div>
+        <div class="edu-institution">Google Cloud</div>
+        <div class="edu-period">2024</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-label" style="justify-content:center;">Contacto</div>
+      <h2 class="section-title">¿Trabajamos juntos?</h2>
+      <p class="contact-desc">
+        Estoy disponible para posiciones de Backend Developer en relación de dependencia. 
+        Si buscás a alguien que construya sistemas robustos, escalables y orientados a datos, hablemos.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:nievarodrigo40@gmail.com" class="contact-link">
+          ✉ nievarodrigo40@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/rodrigonieva" target="_blank" class="contact-link">
+          in LinkedIn
+        </a>
+        <a href="https://github.com/rodrosn0w" target="_blank" class="contact-link">
+          ⌥ GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-text">© 2025 Rodrigo Nieva</span>
+    <span class="footer-text">Backend Developer · Buenos Aires, Argentina</span>
+  </footer>
+
+</body>
+</html>
