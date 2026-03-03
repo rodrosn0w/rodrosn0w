@@ -3,8 +3,8 @@
 ⚡ Actualmente soy **estudiante de 3er año de Ingeniería en Informática en UADE**. Mi foco está en crecer como profesional **Backend Development** con Python.
 
 ### 🚀 Proyectos destacados
-* **QuickOrder Gastro — Optimización de Flujo Gastronómico
-* **RetailCore Engine — Infraestructura de Inventario y Ventas
+* ** QuickOrder Gastro **— Optimización de Flujo Gastronómico
+* ** RetailCore Engine ** — Infraestructura de Inventario y Ventas
 
 ### 📈 Mis stats en GitHub
 <br>
