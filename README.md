@@ -3,8 +3,8 @@
 ⚡ Actualmente soy **estudiante de 3er año de Ingeniería en Informática en UADE**. Mi foco está en crecer como profesional **Backend Development** con Python.
 
 ### 🚀 Proyectos destacados
-* **SmartStore Engine:** Desarrollo de un motor de e-commerce eficiente y escalable.
-* **SmartMenu QR:** Digitalización de menús gastronómicos mediante QR.
+* **QuickOrder Gastro — Optimización de Flujo Gastronómico
+* **RetailCore Engine — Infraestructura de Inventario y Ventas
 
 ### 📈 Mis stats en GitHub
 <br>
